@@ -8,7 +8,7 @@
       <label @dblclick="beginEdit">{{ todo.title }}</label>
       <button class="destroy" @click="$emit('destroy')"></button>
     </div>
-    <input class="edit" v-model="editTitle"
+    <input ref="fld" class="edit" v-model="editTitle"
       @keyup.enter="commitEdit"
       @blur="commitEdit"
       @keyup.esc="cancelEdit"
@@ -30,6 +30,9 @@ export default class TodosItem extends Vue.with(TodoProps) {
   beginEdit() {
     this.editMode = true;
     this.editTitle = this.todo.title;
+    this.$nextTick(() => {
+      (this.$refs.fld as HTMLInputElement).focus();
+    });
   }
 
   cancelEdit() {
