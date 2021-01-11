@@ -4,7 +4,10 @@
       <h1>todos</h1>
       <todos-input @create="createTodo"></todos-input>
     </header>
-    <todos-main :todos="todos"></todos-main>
+    <todos-main :todos="todos"
+      @toggle="toggleTodo"
+      @destroy="deleteTodo"
+    ></todos-main>
     <todos-actionbar :todos="todos"></todos-actionbar>
   </section>
 </template>
@@ -33,6 +36,17 @@ export default class TodosShell extends Vue {
   async createTodo(title: string) {
     const todo = await store.create(title);
     this.todos.push(todo);
+  }
+
+  async toggleTodo(id: number) {
+    const todo = this.todos.find(t => t.id === id) as Todo;
+    await store.update(id, { completed: !todo.completed });
+    todo.completed = !todo.completed;
+  }
+
+  async deleteTodo(id: number) {
+    await store.remove(id);
+    this.todos = this.todos.filter(t => t.id !== id);
   }
 }
 </script>
