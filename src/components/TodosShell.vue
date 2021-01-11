@@ -7,6 +7,7 @@
     <todos-main :todos="todos"
       @toggle="toggleTodo"
       @destroy="deleteTodo"
+      @update="updateTodo"
     ></todos-main>
     <todos-actionbar :todos="todos"></todos-actionbar>
   </section>
@@ -47,6 +48,11 @@ export default class TodosShell extends Vue {
   async deleteTodo(id: number) {
     await store.remove(id);
     this.todos = this.todos.filter(t => t.id !== id);
+  }
+
+  async updateTodo({ id, title }: {id: number; title: string}) {
+    const todo = await store.update(id, { title });
+    this.todos = this.todos.map(t => t.id !== id ? t : todo );
   }
 }
 </script>
