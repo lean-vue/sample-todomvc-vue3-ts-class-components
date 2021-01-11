@@ -4,7 +4,7 @@
     <input id="toggle-all" class="toggle-all" type="checkbox" />
     <label for="toggle-all">Mark all as complete</label>
     <ul class="todo-list">
-      <todos-item v-for="t in todos" :key="t.id"></todos-item>
+      <todos-item v-for="t in todos" :key="t.id" :todo="t"></todos-item>
     </ul>
   </section>
 </template>
