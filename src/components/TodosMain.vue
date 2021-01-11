@@ -10,13 +10,9 @@
 </template>
 
 <script lang="ts">
-import { Todo } from "@/model/todo";
 import { Vue, Options } from "vue-class-component";
 import TodosItem from "./TodosItem.vue";
-
-class TodosProps {
-  todos!: Todo[];
-}
+import { TodosProps } from './props/TodosProps';
 
 @Options({
   components: {

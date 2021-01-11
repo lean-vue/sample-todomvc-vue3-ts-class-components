@@ -5,7 +5,7 @@
       <todos-input @create="createTodo"></todos-input>
     </header>
     <todos-main :todos="todos"></todos-main>
-    <todos-actionbar></todos-actionbar>
+    <todos-actionbar :todos="todos"></todos-actionbar>
   </section>
 </template>
 

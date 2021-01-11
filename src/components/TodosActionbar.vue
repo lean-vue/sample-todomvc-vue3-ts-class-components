@@ -2,7 +2,7 @@
   <!-- This footer should be hidden by default and shown when there are todos -->
   <footer class="footer">
     <!-- This should be `0 items left` by default -->
-    <span class="todo-count"><strong>0</strong> item left</span>
+    <span class="todo-count"><strong>{{ activeCount }}</strong> item left</span>
     <!-- Remove this if you don't implement routing -->
     <ul class="filters">
       <li>
@@ -22,6 +22,11 @@
 
 <script lang="ts">
 import { Vue } from "vue-class-component";
+import { TodosProps } from "./props/TodosProps";
 
-export default class TodosActionbar extends Vue {}
+export default class TodosActionbar extends Vue.with(TodosProps) {
+  get activeCount(): number {
+    return this.todos.reduce( (count, t) => t.completed ? count : count + 1, 0);
+  }
+}
 </script>
