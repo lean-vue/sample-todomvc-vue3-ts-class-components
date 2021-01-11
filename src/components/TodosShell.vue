@@ -2,7 +2,7 @@
   <section class="todoapp">
     <header class="header">
       <h1>todos</h1>
-      <todos-input></todos-input>
+      <todos-input @create="createTodo"></todos-input>
     </header>
     <todos-main :todos="todos"></todos-main>
     <todos-actionbar></todos-actionbar>
@@ -29,5 +29,10 @@ import { Todo } from "@/model/todo";
 })
 export default class TodosShell extends Vue {
   todos: Todo[] = [];
+
+  async createTodo(title: string) {
+    const todo = await store.create(title);
+    this.todos.push(todo);
+  }
 }
 </script>

@@ -1,9 +1,21 @@
 <template>
-  <input class="new-todo" placeholder="What needs to be done?" autofocus />
+  <input v-model="title" @keyup.enter="createTodo" class="new-todo" placeholder="What needs to be done?" autofocus />
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
+import { Vue, Options } from "vue-class-component";
 
-export default class TodosInput extends Vue {}
+@Options({ emits: ['create']})
+export default class TodosInput extends Vue {
+  title = '';
+
+  createTodo() {
+    this.title = this.title.trim();
+
+    if (this.title) {
+      this.$emit('create', this.title);
+      this.title = '';
+    }
+  }
+}
 </script>
