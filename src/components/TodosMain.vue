@@ -1,6 +1,5 @@
 <template>
-  <!-- This section should be hidden by default and shown when there are todos -->
-  <section class="main">
+  <section v-if="todos.length > 0" class="main">
     <input id="toggle-all" class="toggle-all" type="checkbox" />
     <label for="toggle-all">Mark all as complete</label>
     <ul class="todo-list">
